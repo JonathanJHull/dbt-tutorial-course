@@ -6,6 +6,8 @@ models:
     columns:
       - name: product_id
         tests:
+          - primary_key:
+              severity: error
           - not_null:
               severity: error
           - unique:
@@ -25,6 +27,7 @@ models:
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 0
           - dbt_utils.expression_is_true:
+              name: "Retail price >= cost"
               expression: ">= cost"
 
       - name: department
